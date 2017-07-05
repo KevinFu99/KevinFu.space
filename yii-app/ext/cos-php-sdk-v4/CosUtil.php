@@ -21,9 +21,13 @@ class CosUtil extends Api
             'timeout' => 600
         ],
     ];
+    public static $bucketNames = [
+        'default' => 'kspacestatic',
+    ];
 
     private static $instances = array();
 
+    private $name;
     /**
      * Generate An Instance
      * @param string $name
@@ -32,6 +36,12 @@ class CosUtil extends Api
     public static function instance($name = 'default'){
         if(!isset($config[$name])) return null;
         if(isset(self::$instances[$name])) return self::$instances[$name];
-        else return new CosUtil($config[$name]);
+        else return new CosUtil($config[$name],$name);
+    }
+
+    public function __construct($config,$name)
+    {
+        $this->name = $name;
+        parent::__construct($config);
     }
 }
