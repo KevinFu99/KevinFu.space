@@ -12,7 +12,7 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'include.php';
 
 class CosUtil extends Api
 {
-    public static $config = [
+    private static $config = [
         'default' => [
             'app_id' => '1253859841',
             'secret_id' => 'AKIDiJhtuld0Wrzuc8hYGqFRBmALJ8lBoQYk',
@@ -21,7 +21,7 @@ class CosUtil extends Api
             'timeout' => 600
         ],
     ];
-    public static $bucketNames = [
+    private static $bucketNames = [
         'default' => 'kspacestatic',
     ];
 
@@ -31,17 +31,25 @@ class CosUtil extends Api
     /**
      * Generate An Instance
      * @param string $name
-     * @return CosUtil|null
+     * @return CosUtil
      */
     public static function instance($name = 'default'){
-        if(!isset($config[$name])) return null;
-        if(isset(self::$instances[$name])) return self::$instances[$name];
-        else return new CosUtil($config[$name],$name);
+        if(!isset(self::$config[$name])) return null;
+        if(!isset(self::$instances[$name])) self::$instances[$name] = new CosUtil(self::$config[$name],$name);
+        return self::$instances[$name];
     }
 
     public function __construct($config,$name)
     {
         $this->name = $name;
         parent::__construct($config);
+    }
+
+    /**
+     * The Bucket Name Of Current Configuration
+     * @return string
+     */
+    public function bucketName(){
+        return self::$bucketNames[$this->name];
     }
 }

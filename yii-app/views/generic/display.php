@@ -6,4 +6,4 @@
  * Time: 09:01
  */
 ?>
-<div class="generic-display"><?= $message ?></div>
+<div class="generic-display"><?php var_dump($message); ?></div>
