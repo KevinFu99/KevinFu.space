@@ -19,6 +19,7 @@ use yii\helpers\Url;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
             [
                 'attribute' => 'name',
                 'label' => '文件名'
@@ -34,13 +35,17 @@ use yii\helpers\Url;
             ],
             [
                 'attribute' => COS_USE_CDN ? 'access_url' : 'source_url',
+                'format' => 'raw', //防止编码链接
                 'label' => '地址',
                 'value' => function($data) {
                     $url = COS_USE_CDN ? $data['access_url'] : $data['source_url'];
-                    return Html::a(Html::encode($url),$url);
+                    return Html::a(Html::encode($data['name']),$url);
                 }
             ]
         ],
+        'emptyText'=>'无图片',
+        'emptyTextOptions'=>['style'=>'color:red;font-weight:bold'],
+        'layout'=>"{items}"
     ]);?>
     <?php
     if(!$listOver){
