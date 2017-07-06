@@ -41,6 +41,13 @@ use yii\helpers\Url;
                     $url = COS_USE_CDN ? $data['access_url'] : $data['source_url'];
                     return Html::a(Html::encode($data['name']),$url);
                 }
+            ],
+            [
+                'label' => '查看图片',
+                'format' => 'raw',
+                'value' => function($data) {
+                    return Html::a('查看图片',Url::to(['picture/viewpicture','url' => COS_USE_CDN ? $data['access_url'] : $data['source_url']]));
+                }
             ]
         ],
         'emptyText'=>'无图片',

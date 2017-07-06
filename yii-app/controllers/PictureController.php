@@ -39,4 +39,9 @@ class PictureController extends Controller
             ])
         ]);
     }
+
+    public function actionViewpicture($url)
+    {
+        return $this->render('viewpicture',['url' => $url]);
+    }
 }
