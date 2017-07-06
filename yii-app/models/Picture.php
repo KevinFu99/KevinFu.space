@@ -29,7 +29,7 @@ class Picture extends Model
     }
 
     public function listFiles(){
-        if(defined('YII_DEBUG') and YII_DEBUG) assert(isset($pageSize));
+        if(defined('YII_DEBUG') and YII_DEBUG) assert(isset($this->pageSize));
         $info = $this->api->listFolder($this->api->bucketName(),self::$rootDir,$this->pageSize,'eListFileOnly',0,$this->context);
         if($info['code']) throw new \Exception($info['message']);
         $info=$info['data'];

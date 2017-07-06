@@ -8,7 +8,8 @@
 
 namespace app\controllers;
 
-use QCloud\Cos\CosUtil;
+use app\models\Picture;
+use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
@@ -24,8 +25,18 @@ class PictureController extends Controller
         ];
     }*/
 
-    public function actionIndex()
+    public function actionIndex($context = '')
     {
-
+        $api = new Picture();
+        $api->context = $context;
+        $api->pageSize = 20;
+        $api->listFiles();
+        return $this->render('index',[
+            'listOver' => $api->listOver,
+            'context' => $api->context,
+            'dataProvider' => new ArrayDataProvider([
+                'allModels' => $api->recordSet,
+            ])
+        ]);
     }
 }

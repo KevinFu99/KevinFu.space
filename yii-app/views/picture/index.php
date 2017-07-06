@@ -5,10 +5,14 @@
  * Date: 2017-07-05
  * Time: 12:47
  * @var $this \yii\web\View
+ * @var $dataProvider \yii\data\ArrayDataProvider
+ * @var $listOver bool
+ * @var $context string
  */
 $this->title = '图片文件列表';
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 ?>
 
 <div class="picture-index">
@@ -38,4 +42,9 @@ use yii\helpers\Html;
             ]
         ],
     ]);?>
+    <?php
+    if(!$listOver){
+        echo Html::a('下一页',Url::to(['picture/index','context' => $context]),['class' => 'btn btn-primary']);
+    }
+    ?>
 </div>
