@@ -18,8 +18,8 @@ class Picture extends Model
     public $pageSize;
     public $listOver;
     public $recordSet;
+    public $context = ''; //As is stated in Tencent COS
 
-    protected $context = ''; //As is stated in Tencent COS
     protected $api;
 
     function __construct(array $config = [])

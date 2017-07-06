@@ -26,8 +26,6 @@ class PictureController extends Controller
 
     public function actionIndex()
     {
-        $api = CosUtil::instance();
-        $message = $api->listFolder($api->bucketName(),'/');
-        return $this->render('../generic/display',['message' => $message]);
+
     }
 }

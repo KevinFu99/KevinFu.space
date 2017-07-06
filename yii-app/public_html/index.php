@@ -3,6 +3,7 @@
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
+defined('COS_USE_CDN') or define('COS_USE_CDN',false);
 
 require(__DIR__ . '/../ext/cos-php-sdk-v4/CosUtil.php');
 require(__DIR__ . '/../vendor/autoload.php');
