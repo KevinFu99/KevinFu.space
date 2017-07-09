@@ -16,6 +16,7 @@ use yii\helpers\Url;
 ?>
 
 <div class="picture-index">
+    <?= Html::a('上传图片',Url::to(['picture/upload']),['class' => 'btn btn-success']); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -43,10 +44,18 @@ use yii\helpers\Url;
                 }
             ],
             [
-                'label' => '查看图片',
+                'label' => '操作',
                 'format' => 'raw',
                 'value' => function($data) {
-                    return Html::a('查看图片',Url::to(['picture/viewpicture','url' => COS_USE_CDN ? $data['access_url'] : $data['source_url']]));
+                    return
+                        Html::a(
+                            '查看图片',
+                            Url::to(['picture/viewpicture','url' => COS_USE_CDN ? $data['access_url'] : $data['source_url']]),
+                            ['class' => 'btn btn-primary']).
+                        Html::a(
+                            '删除图片',
+                            Url::to(['picture/delete','filename' => $data['name']]),
+                            ['class' => 'btn btn-danger']);
                 }
             ]
         ],

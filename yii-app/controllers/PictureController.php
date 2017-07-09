@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use app\models\Picture;
+use app\models\PictureUploadForm;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -43,5 +44,10 @@ class PictureController extends Controller
     public function actionViewpicture($url)
     {
         return $this->render('viewpicture',['url' => $url]);
+    }
+
+    public function actionUpload(){
+        $model = new PictureUploadForm();
+        return $this->render('upload',['model' => $model]);
     }
 }

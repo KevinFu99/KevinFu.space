@@ -12,15 +12,6 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'include.php';
 
 class CosUtil extends Api
 {
-    private static $config = [
-        'default' => [
-            'app_id' => '1253859841',
-            'secret_id' => 'AKIDiJhtuld0Wrzuc8hYGqFRBmALJ8lBoQYk',
-            'secret_key' => 'rOkwyrZ5OXVGpCRULzSjohQxIRYZxENP',
-            'region' => 'tj',
-            'timeout' => 600
-        ],
-    ];
     private static $bucketNames = [
         'default' => 'kspacestatic',
     ];
@@ -34,15 +25,15 @@ class CosUtil extends Api
      * @return CosUtil
      */
     public static function instance($name = 'default'){
-        if(!isset(self::$config[$name])) return null;
-        if(!isset(self::$instances[$name])) self::$instances[$name] = new CosUtil(self::$config[$name],$name);
+        if(!isset(self::$instances[$name])) self::$instances[$name] = new CosUtil($name);
         return self::$instances[$name];
     }
 
-    public function __construct($config,$name)
+    public function __construct($name)
     {
         $this->name = $name;
-        parent::__construct($config);
+        $config = require (__DIR__ . DIRECTORY_SEPARATOR . 'config.php');
+        parent::__construct($config[$name]);
     }
 
     /**
