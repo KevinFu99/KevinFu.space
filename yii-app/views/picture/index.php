@@ -8,15 +8,25 @@
  * @var $dataProvider \yii\data\ArrayDataProvider
  * @var $listOver bool
  * @var $context string
+ * @var $model app\models\PictureUploadForm
  */
 $this->title = '图片文件列表';
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 ?>
 
 <div class="picture-index">
-    <?= Html::a('上传图片',Url::to(['picture/upload']),['class' => 'btn btn-success']); ?>
+    <div class="picture-upload">
+        <?= Html::label('上传文件') ?>
+        <?php $form = ActiveForm::begin(['action' => ['picture/upload'],'options' => ['enctype' => 'multipart/form-data']]); ?>
+        <?= $form->field($model, 'file')->fileInput() ?>
+        <div class="form-group">
+            <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
+        </div>
+        <?php ActiveForm::end(); ?>
+    </div><!-- picture-upload -->
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [

@@ -32,12 +32,14 @@ class PictureController extends Controller
     public function actionIndex($context = '')
     {
         $api = new Picture();
+        $model = new PictureUploadForm();
         $api->context = $context;
         $api->pageSize = 20;
         $api->listFiles();
         return $this->render('index',[
             'listOver' => $api->listOver,
             'context' => $api->context,
+            'model' => $model,
             'dataProvider' => new ArrayDataProvider([
                 'allModels' => $api->recordSet,
             ])
@@ -50,13 +52,12 @@ class PictureController extends Controller
     }
 
     public function actionUpload(){
-        $model = new PictureUploadForm();
         if(Yii::$app->request->isPost){
+            $model = new PictureUploadForm();
             $model->file = UploadedFile::getInstance($model,'file');
             $ret = $model->save();
             return $this->render('finish',['status' => $ret, 'type' => 'upload']);
         }
-        return $this->render('upload',['model' => $model]);
     }
 
     public function actionDelete($filename){
