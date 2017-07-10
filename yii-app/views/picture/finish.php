@@ -6,17 +6,19 @@
  * Time: 22:17
  * @var $status []
  * @var $this \yii\web\View
+ * @var $type string
  */
 use yii\helpers\Html;
-$this->title = '上传完成';
+$type = $type == 'upload' ? '上传' : '删除';
+$this->title = $type.'完成';
 ?>
 <?php if($status['code']): ?>
 <div class="bg-danger">
-    上传失败：原因为<?= $status['message'] ?>
+    <?=$type ?>失败：原因为<?= $status['message'] ?>
 </div>
 <?php else: ?>
 <div class="bg-success">
-    上传成功
+    <?= $type ?>成功
 </div>
 <?php endif; ?>
 <?= Html::a('返回','javascript:window.history.back();',['class' => 'btn btn-primary']); ?>

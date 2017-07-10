@@ -35,4 +35,8 @@ class Picture extends Model
         $this->listOver = $info['listover'];
         $this->recordSet = $info['infos'];
     }
+
+    public function deleteFile($filename){
+        return $this->api->delFile($this->api->bucketName(),$this->api->rootDir().DIRECTORY_SEPARATOR.$filename);
+    }
 }

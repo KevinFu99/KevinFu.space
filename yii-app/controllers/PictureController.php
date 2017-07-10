@@ -54,8 +54,13 @@ class PictureController extends Controller
         if(Yii::$app->request->isPost){
             $model->file = UploadedFile::getInstance($model,'file');
             $ret = $model->save();
-            return $this->render('upload_finish',['status' => $ret]);
+            return $this->render('finish',['status' => $ret, 'type' => 'upload']);
         }
         return $this->render('upload',['model' => $model]);
+    }
+
+    public function actionDelete($filename){
+        $model = new Picture();
+        return $this->render('finish',['type' => 'delete', 'status' => $model->deleteFile($filename)]);
     }
 }
