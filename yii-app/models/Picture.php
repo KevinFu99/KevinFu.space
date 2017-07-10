@@ -13,8 +13,6 @@ use yii\base\Model;
 
 class Picture extends Model
 {
-    protected static $rootDir = '/pictures';
-
     public $pageSize;
     public $listOver;
     public $recordSet;
@@ -30,7 +28,7 @@ class Picture extends Model
 
     public function listFiles(){
         if(defined('YII_DEBUG') and YII_DEBUG) assert(isset($this->pageSize));
-        $info = $this->api->listFolder($this->api->bucketName(),self::$rootDir,$this->pageSize,'eListFileOnly',0,$this->context);
+        $info = $this->api->listFolder($this->api->bucketName(),$this->api->rootDir(),$this->pageSize,'eListFileOnly',0,$this->context);
         if($info['code']) throw new \Exception($info['message']);
         $info=$info['data'];
         $this->context = $info['context'];

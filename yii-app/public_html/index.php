@@ -4,6 +4,7 @@
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
 defined('COS_USE_CDN') or define('COS_USE_CDN',false);
+defined('UPLOAD_DIR') or define('UPLOAD_DIR',__DIR__.'/../upload');
 
 require(__DIR__ . '/../ext/cos-php-sdk-v4/CosUtil.php');
 require(__DIR__ . '/../vendor/autoload.php');

@@ -13,6 +13,9 @@ use app\models\PictureUploadForm;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\UploadedFile;
+use yii\web\YiiAsset;
+use Yii;
 
 class PictureController extends Controller
 {
@@ -48,6 +51,11 @@ class PictureController extends Controller
 
     public function actionUpload(){
         $model = new PictureUploadForm();
+        if(Yii::$app->request->isPost){
+            $model->file = UploadedFile::getInstance($model,'file');
+            $ret = $model->save();
+            return $this->render('upload_finish',['status' => $ret]);
+        }
         return $this->render('upload',['model' => $model]);
     }
 }

@@ -15,6 +15,9 @@ class CosUtil extends Api
     private static $bucketNames = [
         'default' => 'kspacestatic',
     ];
+    private static $rootDirs = [
+        'default' => 'pictures',
+    ];
 
     private static $instances = array();
 
@@ -42,5 +45,13 @@ class CosUtil extends Api
      */
     public function bucketName(){
         return self::$bucketNames[$this->name];
+    }
+
+    /**
+     * Root Directory
+     * @return string
+     */
+    public function rootDir(){
+        return self::$rootDirs[$this->name];
     }
 }
